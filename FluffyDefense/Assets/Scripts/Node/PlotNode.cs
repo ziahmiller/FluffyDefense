@@ -15,6 +15,10 @@ namespace FluffyDefense
         /// </summary>
         public GameObject currentPlotAsset;
 
+        /// <summary>
+        /// The tower assigned to Plot Node.
+        /// </summary>
+        public Tower tower;
 
         // Use this for initialization
         void Start()

@@ -29,6 +29,11 @@ namespace FluffyDefense
         public EnemySpawner enemySpawner;
 
         /// <summary>
+        /// Tower builder.
+        /// </summary>
+        public TowerBuilder towerBuilder;
+
+        /// <summary>
         /// Games main UI.
         /// </summary>
         public GameUI gameUI;
@@ -107,13 +112,15 @@ namespace FluffyDefense
         /// </summary>
         public void SpawnEnemies()
         {
-            if (waveInProgress) {
+            if (waveInProgress)
+            {
                 //Checks when the next enemy needs to be spawned.
                 if (enemySpawner.currentWaveLength > Time.time)
                 {
                     gameUI.UpdateRemainingTime(enemySpawner.currentWaveLength);
 
-                    if (enemySpawner.currentSpawnTime < Time.time) {
+                    if (enemySpawner.currentSpawnTime < Time.time)
+                    {
                         enemySpawner.SpawnEnemy(enemySpawner.enemiesForLevel[Random.Range(0, enemySpawner.enemiesForLevel.Count)], nodeContiner.finalPath);
                     }
                 }
@@ -124,6 +131,7 @@ namespace FluffyDefense
                     endOfWave.Invoke();
                 }
             }
+            
         }
 
         /// <summary>
@@ -150,13 +158,24 @@ namespace FluffyDefense
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             
-            //This causes a lone to come out from where the player is looking to the place the player tapped. It will let you know the first thing it hits.
+            //This causes a line to come out from the camera to the place the player tapped. It will let you know the first thing it hits.
             if (Physics.Raycast(ray, out hit, 100.0f))
             {
                 if (hit.transform.tag == "Enemy")
                 {
                     targetedEnemy = hit.transform.GetComponent<Enemy>();
+
                 }
+                else if (waveInProgress == false && hit.transform.tag == "Plot" && !towerBuilder.towerBuilderUI.gameObject.activeInHierarchy)
+                {
+                    PlotNode newNode = hit.transform.GetComponent<PlotNode>();
+                    if (newNode.tower == null)
+                    {
+                        towerBuilder.SlectedPlotToBuild(newNode);
+                    }
+                }
+
+
             }
         }
 
