@@ -84,7 +84,8 @@ namespace FluffyDefense
         public UnityEvent endOfWave;
 
         /// <summary>
-        /// Gets the instance of GameController.
+        /// Gets the instance of GameController. 
+        /// We do this so we can add to this function for more advance topics like locking for multithread use. 
         /// </summary>
         /// <returns>Returns the instance of GameController</returns>
         public static GameController GetInstance()
@@ -135,7 +136,7 @@ namespace FluffyDefense
         }
 
         /// <summary>
-        /// Gets the users clicks or taps
+        /// Gets the users when clicks or taps down.
         /// </summary>
         public void GetInputDown()
         {
