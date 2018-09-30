@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac5dfa178329bf45930cfd440a81cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 20
+  damage: 2
+  speed: 15
   target: {fileID: 0}
   projectileBody: {fileID: 54929622170542564}
   hitEnemy: 0

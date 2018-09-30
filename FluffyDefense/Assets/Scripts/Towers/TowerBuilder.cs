@@ -55,11 +55,17 @@ namespace FluffyDefense
         /// </summary>
         public void BuildTower()
         {
-            Tower newTower = Instantiate(selectedTowerToBuild);
-            newTower.transform.position = selectedNodeToBuildOn.transform.position;
-            selectedNodeToBuildOn.tower = newTower;
-            newTower.transform.SetParent(this.transform);
-            towerBuilderUI.gameObject.SetActive(false);
+            if (GameController.GetInstance().PurchaseTower(selectedTowerToBuild)) {
+                Tower newTower = Instantiate(selectedTowerToBuild);
+                newTower.transform.position = selectedNodeToBuildOn.transform.position;
+                selectedNodeToBuildOn.tower = newTower;
+                newTower.transform.SetParent(this.transform);
+                towerBuilderUI.gameObject.SetActive(false);
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>

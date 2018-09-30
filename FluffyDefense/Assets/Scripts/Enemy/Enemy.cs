@@ -108,6 +108,18 @@ namespace FluffyDefense
         public int damageIDo = 1;
 
         /// <summary>
+        /// Sets up the enmies life and reword with new values.
+        /// </summary>
+        /// <param name="life">Amount to change life.</param>
+        /// <param name="rewardAmount">Amount to change reword value</param>
+        public void SetLifeAndGold(int life, int rewardAmount)
+        {
+            CurrentLife = life;
+            MaxLife = life;
+            rewardValue = rewardAmount;
+        }
+
+        /// <summary>
         /// Handles taking damage
         /// </summary>
         /// <param name="amount"></param>

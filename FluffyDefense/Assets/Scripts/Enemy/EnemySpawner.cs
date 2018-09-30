@@ -9,10 +9,6 @@ namespace FluffyDefense
     /// </summary>
     public class EnemySpawner : MonoBehaviour
     {
-        /// <summary>
-        /// How long the wave goes.
-        /// </summary>
-        public float waveLength = 30.0f;
 
         /// <summary>
         /// The current time of the wave.
@@ -35,6 +31,16 @@ namespace FluffyDefense
         public List<Enemy> enemiesForLevel = new List<Enemy>();
 
         /// <summary>
+        /// Setting for enemy waves.
+        /// </summary>
+        public EnemySpawnerSettings enemySpawnerSettings;
+
+        /// <summary>
+        /// GameObject that holds the enemies being spawned.
+        /// </summary>
+        public Transform emenyContainer;
+
+        /// <summary>
         /// Spawns and enemy.
         /// </summary>
         /// <param name="enemy">The enemy that will be spawned</param>
@@ -42,10 +48,14 @@ namespace FluffyDefense
         public void SpawnEnemy(Enemy enemy, List<GameObject> path)
         {
             Enemy newEnemy = Instantiate(enemy);
+
+            //We are using functions to return the correct values and setting them.
+            newEnemy.SetLifeAndGold(enemySpawnerSettings.GetEnemyLife(),enemySpawnerSettings.GetEnemyGold()); 
+
             newEnemy.transform.position = path[0].transform.position;
             newEnemy.pathToFollow = path;
             currentSpawnTime = timeBetweenSpawns + Time.time;
-            newEnemy.transform.SetParent(this.transform);
+            newEnemy.transform.SetParent(emenyContainer);
         }
 
         /// <summary>
@@ -53,7 +63,25 @@ namespace FluffyDefense
         /// </summary>
         public void SetUpWave()
         {
-            currentWaveLength = waveLength + Time.time;
+            timeBetweenSpawns = enemySpawnerSettings.enemyWaveSpawnTime[enemySpawnerSettings.currentWave];
+            currentWaveLength = enemySpawnerSettings.enemyWaveLength[enemySpawnerSettings.currentWave] + Time.time;
+        }
+
+        /// <summary>
+        /// Handles end of wave for spawning enemies.
+        /// </summary>
+        /// <returns>If there are more waves to come.</returns>
+        public bool EndOfWave()
+        {
+            enemySpawnerSettings.currentWave++;
+            if (enemySpawnerSettings.currentWave < enemySpawnerSettings.enemyLifePerWave.Length)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

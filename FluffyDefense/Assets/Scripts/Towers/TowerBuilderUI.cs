@@ -10,6 +10,8 @@ namespace FluffyDefense
     /// </summary>
     public class TowerBuilderUI : MonoBehaviour
     {
+        public TowerBuilder towerBuilder;
+
         /// <summary>
         /// The cell that displays tower info.
         /// </summary>
@@ -61,6 +63,7 @@ namespace FluffyDefense
             foreach (Tower tower in allTowers)
             {
                 TowerCellInfo newCell = Instantiate(towerCellPrefab);
+                newCell.towerBuilder = towerBuilder;
                 newCell.SetUpTowerCellInfo(tower);
                 newCell.transform.SetParent(towerCellContainer.transform, false);
             }

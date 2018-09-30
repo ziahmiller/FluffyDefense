@@ -28,26 +28,33 @@ namespace FluffyDefense
         public Text curentWaveTimeText;
 
         /// <summary>
+        /// What the current wave is for level.
+        /// </summary>
+        public int currentWave;
+
+        /// <summary>
+        /// Max amount of waves for level.
+        /// </summary>
+        public int maxWavesForLevel;
+
+        /// <summary>
         /// Button that spawns a way.
         /// </summary>
         public Button spawnButton;
 
-        // Use this for initialization
-        void Start()
+        public void SetWaveValues(int current, int max)
         {
-            GameController.GetInstance().endOfWave.AddListener(ResetUI);
-            ResetUI();
+            maxWavesForLevel = max;
+            currentWave = current;
         }
 
-        // Update is called once per frame
-        void Update()
+        /// <summary>
+        /// Resets the UI.
+        /// </summary>
+        /// <param name="moreWaves">If there are more waves to come.</param>
+        public void ResetUI(bool moreWaves)
         {
-
-        }
-
-        public void ResetUI()
-        {
-            spawnButton.gameObject.SetActive(true);
+            spawnButton.gameObject.SetActive(moreWaves);
             curentWaveTimeText.gameObject.SetActive(false);
             UpdatePlayersStats();
         }
@@ -56,7 +63,7 @@ namespace FluffyDefense
         {
             //Trying to get the current wave time as an int though it is a float. (int) placed in front of the equation will cast it as an int.
             int theTime = (int)(currentWaveTime - Time.time + 0.5f);
-            curentWaveTimeText.text = theTime.ToString();
+            curentWaveTimeText.text = "Wave " + currentWave + " of " + maxWavesForLevel + "\n" + "Time : "+ theTime.ToString();
         }
 
         public void UpdatePlayersStats()

@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4391800745051016}
   - component: {fileID: 114126856631472102}
   m_Layer: 0
-  m_Name: BasicTowerGreen
+  m_Name: BasicTowerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,14 +532,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77aaba92c39045042899785fd5595821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Basic Tower Green
-  discription: Shoots a cannon ball for 1 damage.
-  price: 10
+  title: Bullet Tower
+  discription: Quickly shoots bullets for 1 damage.
+  price: 20
   towerIcon: {fileID: 21300000, guid: a3571378b4332a74fa1e6ca93a85a674, type: 3}
   target: {fileID: 0}
   turret: {fileID: 4425933675211864}
   endPoint: {fileID: 4056819817139910}
-  aimingDistance: 4
-  projectile: {fileID: 114041109847042116, guid: 2483307cab137f948b3b0b1640b1a879,
+  aimingDistance: 5
+  projectile: {fileID: 114041109847042116, guid: 4b02ccd99d989a548b3fc4395654f8b1,
     type: 2}
-  fireSpeed: 3
+  fireSpeed: 0.7

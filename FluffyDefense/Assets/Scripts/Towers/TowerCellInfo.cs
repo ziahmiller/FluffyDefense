@@ -41,6 +41,11 @@ namespace FluffyDefense
         public Button selectTowerButton;
 
         /// <summary>
+        /// Parent TowerBuilder Script.
+        /// </summary>
+        public TowerBuilder towerBuilder;
+
+        /// <summary>
         /// Sets the values of a new tower to the cell
         /// </summary>
         /// <param name="newTower">The tower for this cell</param>
@@ -56,9 +61,11 @@ namespace FluffyDefense
 
         public void SelectThisTower()
         {
+            towerBuilder.SelectTower(tower);
+
             //if (GameController.GetInstance().playerStats.currentRewordAmount >= tower.price)
             //{
-                GameController.GetInstance().towerBuilder.SelectTower(tower);
+            //  GameController.GetInstance().towerBuilder.SelectTower(tower);
             //}
         }
     }

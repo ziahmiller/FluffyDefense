@@ -106,7 +106,7 @@ namespace FluffyDefense
             float closestEnemy = 110.0f;
 
             //Looking through all enemies in the game. We can do this since we make all enemies a child of EnemySpawner.
-            foreach (Transform child in GameController.GetInstance().enemySpawner.transform)
+            foreach (Transform child in GameController.GetInstance().enemySpawner.emenyContainer)
             {
                 //Need to make sure the enemy is close enough to target.
                 float distanceAway = Vector3.Distance(turret.position, child.position);

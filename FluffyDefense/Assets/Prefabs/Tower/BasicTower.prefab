@@ -532,9 +532,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77aaba92c39045042899785fd5595821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Basic Tower
-  discription: Shoots a cannon ball for 1 damage.
-  price: 10
+  title: Cannon Tower
+  discription: Shoots a cannon ball for 2 damage.
+  price: 5
   towerIcon: {fileID: 21300000, guid: 479733d2fc0216c4ab837192496a1a3a, type: 3}
   target: {fileID: 0}
   turret: {fileID: 4003742384275716}

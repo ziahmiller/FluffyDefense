@@ -81,7 +81,7 @@ namespace FluffyDefense
         /// <summary>
         /// Called when a way ends.
         /// </summary>
-        public UnityEvent endOfWave;
+        public UnityEvent EndOfWave;
 
         /// <summary>
         /// Gets the instance of GameController. 
@@ -98,6 +98,14 @@ namespace FluffyDefense
         {
             instance = this;
             ToggleMainMenu(false);
+            //We use a unity event incase we want to add scene objects to the end of a wave.
+            EndOfWave.AddListener(HandleEndOfWave);
+            
+        }
+
+        private void Start()
+        {
+            gameUI.ResetUI(true);
         }
 
         // Update is called once per frame
@@ -126,10 +134,10 @@ namespace FluffyDefense
                     }
                 }
 
-                if (enemySpawner.currentWaveLength < Time.time && enemySpawner.transform.childCount == 0)
+                if (enemySpawner.currentWaveLength < Time.time && enemySpawner.emenyContainer.childCount == 0)
                 {
                     waveInProgress = false;
-                    endOfWave.Invoke();
+                    EndOfWave.Invoke();
                 }
             }
             
@@ -262,6 +270,8 @@ namespace FluffyDefense
         public void StartWave()
         {
             enemySpawner.SetUpWave();
+            //We add plus one to current wave since we work of 0 in arrays but it is position 1;
+            gameUI.SetWaveValues( enemySpawner.enemySpawnerSettings.currentWave + 1, enemySpawner.enemySpawnerSettings.enemyLifePerWave.Length);
             waveInProgress = true;
         }
 
@@ -280,7 +290,6 @@ namespace FluffyDefense
         /// <param name="amount">Amount to add</param>
         public void AddRewaord(int amount)
         {
-            Debug.Log("amount " + amount);
             playerStats.AddReward(amount);
             gameUI.UpdatePlayersStats();
         }
@@ -300,6 +309,31 @@ namespace FluffyDefense
             {
                 Time.timeScale = 1;
             }
+        }
+
+        /// <summary>
+        /// Handles the process for end of wave.
+        /// </summary>
+        public void HandleEndOfWave()
+        {
+            bool anotherWave = enemySpawner.EndOfWave();
+            gameUI.ResetUI(anotherWave);
+        }
+
+        public bool PurchaseTower(Tower tower)
+        {
+            if (playerStats.currentRewordAmount >= tower.price)
+            {
+                playerStats.currentRewordAmount -= tower.price;
+                gameUI.ResetUI(enemySpawner.enemySpawnerSettings.currentWave < enemySpawner.enemySpawnerSettings.enemyLifePerWave.Length);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            
         }
     }
 }
